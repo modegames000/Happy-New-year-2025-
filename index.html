@@ -1,185 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy New Year 2026 ✨</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-body{
-    height:100vh;
-    font-family:'Poppins',sans-serif;
-    color:#fff;
-    overflow:hidden;
-    transition:background 0.3s linear;
-}
-canvas{
-    position:fixed;
-    inset:0;
-    z-index:1;
-}
-.wrapper{
-    position:relative;
-    z-index:2;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-.card{
-    max-width:750px;
-    width:100%;
-    padding:60px 40px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(15px);
-    box-shadow:0 30px 80px rgba(0,0,0,.4);
-    text-align:center;
-}
-h1{
-    font-size:3.2rem;
-    margin-bottom:20px;
-}
-h2{
-    font-size:2rem;
-    font-weight:400;
-    margin-bottom:25px;
-}
-.message{
-    font-size:1.4rem;
-    line-height:1.6;
-    min-height:90px;
-    margin-bottom:30px;
-}
-.sender{
-    font-size:1.2rem;
-    opacity:.85;
-    margin-bottom:35px;
-}
-button{
-    padding:16px 36px;
-    font-size:1.1rem;
-    border:none;
-    border-radius:50px;
-    cursor:pointer;
-    background:#25D366;
-    color:#fff;
-}
-button:hover{
-    transform:scale(1.05);
-}
-
-@media(max-width:600px){
-    h1{font-size:2.5rem}
-    h2{font-size:1.6rem}
-    .message{font-size:1.2rem}
-}
-</style>
-</head>
-
-<body>
-
-<canvas id="snow"></canvas>
-
-<div class="wrapper">
-    <div class="card">
-        <h1>🎉 Happy New Year 2026 🎉</h1>
-        <h2 id="toName"></h2>
-        <div class="message" id="type"></div>
-        <div class="sender" id="fromName"></div>
-        <button onclick="share()">Share on WhatsApp</button>
-    </div>
-</div>
-
-<script>
-// URL data
-const q = new URLSearchParams(location.search);
-const to = q.get("to") || "My Dear Friend";
-const from = q.get("from") || "Someone Who Cares";
-
-document.getElementById("toName").innerText = to;
-document.getElementById("fromName").innerText = "— Wishes from " + from;
-
-// Typewriter
-const text =
-"May this New Year bring you happiness, success, good health, and endless joy. May every day of 2026 be filled with positivity and smiles.";
-let i = 0;
-function type(){
-    if(i < text.length){
-        document.getElementById("type").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, 35);
-    }
-}
-type();
-
-// WhatsApp share
-function share(){
-    const msg =
-`🎉 Happy New Year 2026 🎉
-Dear ${to},
-
-A special wish for you from ${from} ✨
-Click 👉 ${location.href}`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
-}
-
-// 🔥 PURE RGB BACKGROUND ANIMATION (FIXED)
-let r = 255, g = 0, b = 0;
-let speed = 1;
-
-setInterval(() => {
-    if (r === 255 && g < 255 && b === 0) g += speed;
-    else if (g === 255 && r > 0 && b === 0) r -= speed;
-    else if (g === 255 && b < 255 && r === 0) b += speed;
-    else if (b === 255 && g > 0 && r === 0) g -= speed;
-    else if (b === 255 && r < 255 && g === 0) r += speed;
-    else if (r === 255 && b > 0 && g === 0) b -= speed;
-
-    document.body.style.background =
-        `linear-gradient(120deg,
-        rgb(${r},${g},${b}),
-        rgb(${255-r},${255-g},${255-b}),
-        rgb(${g},${b},${r}))`;
-}, 30);
-
-// ❄️ Snowfall
-const c = document.getElementById("snow");
-const ctx = c.getContext("2d");
-c.width = innerWidth;
-c.height = innerHeight;
-
-let flakes = Array.from({length:120},()=>({
-    x:Math.random()*c.width,
-    y:Math.random()*c.height,
-    r:Math.random()*3+1,
-    d:Math.random()+1
-}));
-
-setInterval(()=>{
-    ctx.clearRect(0,0,c.width,c.height);
-    ctx.fillStyle="white";
-    ctx.beginPath();
-    flakes.forEach(f=>{
-        ctx.moveTo(f.x,f.y);
-        ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-    });
-    ctx.fill();
-    flakes.forEach(f=>{
-        f.y += f.d;
-        if(f.y > c.height){
-            f.y = 0;
-            f.x = Math.random()*c.width;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year, My Friend!</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
-    });
-},30);
-</script>
+        h1 {
+            font-size: 3.5em;
+            margin: 0;
+            text-shadow: 0 0 20px #00d4ff, 0 0 40px #00d4ff;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        .wish-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        .wish {
+            font-size: 1.4em;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        .wish:nth-child(1) { animation-delay: 1s; }
+        .wish:nth-child(2) { animation-delay: 3s; }
+        .wish:nth-child(3) { animation-delay: 5s; }
+        button {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0099cc;
+        }
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 1.5em;
+            animation: fall 10s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes fall {
+            0% { top: -10px; opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy New Year, My Dear Friend! 🎉</h1>
+    <div class="wish-container">
+        <p class="wish">Here's to a year filled with laughter, unforgettable adventures, and dreams coming true. You're the spark that lights up my world!</p>
+        <p class="wish">May 2026 bring you endless joy, good health, and the courage to chase every wild idea. Cheers to our friendship that grows stronger each day!</p>
+        <p class="wish">Wishing you a fresh start, new opportunities, and a heart full of gratitude. Let's make this year epic together! 🌟</p>
+    </div>
+    <button onclick="generateWish()">Get a Random Unique Wish</button>
 
+    <script>
+        // Array of unique wishes
+        const wishes = [
+            "May your New Year be as bright and colorful as a fireworks show, and may every day bring a new reason to smile!",
+            "To my amazing friend: Here's to turning pages, chasing horizons, and creating memories that last a lifetime. Happy New Year!",
+            "Wishing you a year of breakthroughs, breakthroughs in love, career, and self-discovery. You're unstoppable!",
+            "May 2024 be your canvas, and may you paint it with bold strokes of happiness, success, and endless fun. Love you!",
+            "Here's to new beginnings, old friends, and the magic of possibilities. Let's toast to an incredible year ahead!",
+            "May your path be lined with opportunities, your heart with love, and your days with pure bliss. Happy New Year, buddy!",
+            "To the one who makes life brighter: Wishing you a year of growth, giggles, and goals achieved. You're a star!",
+            "May this New Year bring you peace, prosperity, and plenty of adventures. Here's to us conquering the world together!",
+            "Wishing you a year where every challenge turns into a triumph, and every moment is cherished. You're my favorite!",
+            "Happy New Year! May it be filled with surprises, successes, and the warmth of true friendship. Let's make it legendary!"
+        ];
+
+        // Function to generate a random wish
+        function generateWish() {
+            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+            alert(randomWish);
+        }
+
+        function createFirework() {
+            const fireworks = document.getElementById('fireworks');
+            for (let i = 0; i < 15; i++) {
+                const firework = document.createElement('div');
+                firework.style.position = 'absolute';
+                firework.style.width = '5px';
+                firework.style.height = '5px';
+                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                firework.style.left = Math.random() * 100 + '%';
+                firework.style.top = Math.random() * 100 + '%';
+                firework.style.animation = 'explode 1s ease-out forwards';
+                fireworks.appendChild(firework);
+                
+                setTimeout(() => {
+                    fireworks.removeChild(firework);
+                }, 1000);
+            }
+        }
+
+        // Create falling snowflakes
+        function createSnowflakes() {
+            const snowContainer = document.getElementById('snowContainer');
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = '❄';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDelay = Math.random() * 10 + 's';
+                snowflake.style.fontSize = Math.random() * 1.5 + 0.5 + 'em';
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Initialize snowflakes on load
+        window.onload = createSnowflakes;
+
+        // Add explode animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes explode {
+                0% { transform: scale(1); opacity: 1; }
+                100% { transform: scale(15); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
