@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026 ✨</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    height:100vh;
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+    overflow:hidden;
+    transition:background 0.3s linear;
+}
+canvas{
+    position:fixed;
+    inset:0;
+    z-index:1;
+}
+.wrapper{
+    position:relative;
+    z-index:2;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.card{
+    max-width:750px;
+    width:100%;
+    padding:60px 40px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    box-shadow:0 30px 80px rgba(0,0,0,.4);
+    text-align:center;
+}
+h1{
+    font-size:3.2rem;
+    margin-bottom:20px;
+}
+h2{
+    font-size:2rem;
+    font-weight:400;
+    margin-bottom:25px;
+}
+.message{
+    font-size:1.4rem;
+    line-height:1.6;
+    min-height:90px;
+    margin-bottom:30px;
+}
+.sender{
+    font-size:1.2rem;
+    opacity:.85;
+    margin-bottom:35px;
+}
+button{
+    padding:16px 36px;
+    font-size:1.1rem;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    background:#25D366;
+    color:#fff;
+}
+button:hover{
+    transform:scale(1.05);
+}
+
+@media(max-width:600px){
+    h1{font-size:2.5rem}
+    h2{font-size:1.6rem}
+    .message{font-size:1.2rem}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="snow"></canvas>
+
+<div class="wrapper">
+    <div class="card">
+        <h1>🎉 Happy New Year 2026 🎉</h1>
+        <h2 id="toName"></h2>
+        <div class="message" id="type"></div>
+        <div class="sender" id="fromName"></div>
+        <button onclick="share()">Share on WhatsApp</button>
+    </div>
+</div>
+
+<script>
+// URL data
+const q = new URLSearchParams(location.search);
+const to = q.get("to") || "My Dear Friend";
+const from = q.get("from") || "Someone Who Cares";
+
+document.getElementById("toName").innerText = to;
+document.getElementById("fromName").innerText = "— Wishes from " + from;
+
+// Typewriter
+const text =
+"May this New Year bring you happiness, success, good health, and endless joy. May every day of 2026 be filled with positivity and smiles.";
+let i = 0;
+function type(){
+    if(i < text.length){
+        document.getElementById("type").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 35);
+    }
+}
+type();
+
+// WhatsApp share
+function share(){
+    const msg =
+`🎉 Happy New Year 2026 🎉
+Dear ${to},
+
+A special wish for you from ${from} ✨
+Click 👉 ${location.href}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+}
+
+// 🔥 PURE RGB BACKGROUND ANIMATION (FIXED)
+let r = 255, g = 0, b = 0;
+let speed = 1;
+
+setInterval(() => {
+    if (r === 255 && g < 255 && b === 0) g += speed;
+    else if (g === 255 && r > 0 && b === 0) r -= speed;
+    else if (g === 255 && b < 255 && r === 0) b += speed;
+    else if (b === 255 && g > 0 && r === 0) g -= speed;
+    else if (b === 255 && r < 255 && g === 0) r += speed;
+    else if (r === 255 && b > 0 && g === 0) b -= speed;
+
+    document.body.style.background =
+        `linear-gradient(120deg,
+        rgb(${r},${g},${b}),
+        rgb(${255-r},${255-g},${255-b}),
+        rgb(${g},${b},${r}))`;
+}, 30);
+
+// ❄️ Snowfall
+const c = document.getElementById("snow");
+const ctx = c.getContext("2d");
+c.width = innerWidth;
+c.height = innerHeight;
+
+let flakes = Array.from({length:120},()=>({
+    x:Math.random()*c.width,
+    y:Math.random()*c.height,
+    r:Math.random()*3+1,
+    d:Math.random()+1
+}));
+
+setInterval(()=>{
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle="white";
+    ctx.beginPath();
+    flakes.forEach(f=>{
+        ctx.moveTo(f.x,f.y);
+        ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    });
+    ctx.fill();
+    flakes.forEach(f=>{
+        f.y += f.d;
+        if(f.y > c.height){
+            f.y = 0;
+            f.x = Math.random()*c.width;
+        }
+    });
+},30);
+</script>
+
+</body>
+</html>
